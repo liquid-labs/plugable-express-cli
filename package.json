@@ -1,6 +1,6 @@
 {
   "name": "@liquid-labs/plugable-express-cli",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "description": "",
   "main": "dist/plugable-express-cli.js",
   "scripts": {
@@ -13,7 +13,9 @@
     "prepare": "npm run build",
     "qa": "make qa"
   },
-  "files": [ "./dist" ],
+  "files": [
+    "./dist"
+  ],
   "engines": {
     "node": ">18.0.0"
   },
