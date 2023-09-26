@@ -13,5 +13,19 @@
   "bugs": {
     "url": "https://github.com/liquid-labs/plugable-express-cli/issues"
   },
-  "homepage": "https://github.com/liquid-labs/plugable-express-cli#readme"
+  "homepage": "https://github.com/liquid-labs/plugable-express-cli#readme",
+  "devDependencies": {
+    "@liquid-labs/catalyst-scripts-node-project": "^1.0.0-alpha.22"
+  },
+  "dependencies": {
+    "@liquid-labs/edit-section": "^1.0.0-alpha.1",
+    "@liquid-labs/liq-defaults": "^1.0.0-alpha.2",
+    "@liquid-labs/npm-toolkit": "^1.0.0-alpha.3",
+    "@liquid-labs/question-and-answer": "^1.0.0-alpha.12",
+    "@liquid-labs/shell-toolkit": "^1.0.0-alpha.7",
+    "@liquid-labs/terminal-text": "^1.0.0-alpha.2",
+    "@liquid-labs/wrap-text": "^1.0.0-alpha.5",
+    "js-yaml": "^4.1.0",
+    "shlex": "^2.1.2"
+  }
 }
