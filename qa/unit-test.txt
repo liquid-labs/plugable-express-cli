@@ -1,0 +1,39 @@
+Test git rev: e59e71e6d6603cc5d5893db9fcdda8a81736b3ad
+PASS lib/lib/test/process-command.test.js
+  processCommand
+    ✓ command '[]' yields path '/' (2 ms)
+    ✓ command '[ 'foo' ]' yields path '/foo'
+    ✓ command '[ 'foo', 'bar' ]' yields path '/foo/bar'
+    ✓ command '[ 'foo bar', 'baz' ]' yields path '/foo%20bar/baz'
+    ✓ processes leading method
+    ✓ parameter '[ 'foo=1' ]' yields '[[Array]]'
+    ✓ parameter '[ 'bar=hey there' ]' yields '[[Array]]'
+    ✓ parameter '[ 'baz' ]' yields '[[Array]]' (1 ms)
+    ✓ parameter '[ 'foo=1', 'baz' ]' yields '[[Array], [Array]]' (1 ms)
+    ✓ command '["POST", "work", "create", "--", "bar=1"]' yields url 'http://127.0.0.1:32600/work/create' (1 ms)
+    ✓ command '["GET", "foo", "bar", "--", "baz=1"]' yields url 'http://127.0.0.1:32600/foo/bar?baz=1'
+    ✓ command '["GET", "foo", "bar", "--", "baz=1", "bobo"]' yields url 'http://127.0.0.1:32600/foo/bar?baz=1&bobo=true'
+
+---------------------------|---------|----------|---------|---------|--------------------------------
+File                       | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s              
+---------------------------|---------|----------|---------|---------|--------------------------------
+All files                  |   11.02 |    15.43 |    10.2 |   14.05 |                                
+ lib                       |       0 |        0 |       0 |       0 |                                
+  index.js                 |       0 |        0 |       0 |       0 | 1                              
+  plugable-express-cli.mjs |       0 |        0 |       0 |       0 | 1-63                           
+ lib/lib                   |   12.38 |     16.9 |    11.9 |   15.88 |                                
+  call-endpoint.mjs        |       0 |        0 |       0 |       0 | 1-11                           
+  install-server.mjs       |       0 |        0 |       0 |       0 | 1-32                           
+  process-command.mjs      |   67.07 |    60.75 |    62.5 |   70.96 | 6-23,57-58,70-71,81-83,105-107 
+  process-input.mjs        |       0 |        0 |       0 |       0 | 1-64                           
+  process-qna.mjs          |       0 |        0 |       0 |       0 | 1-67                           
+  process-special.mjs      |       0 |        0 |       0 |       0 | 1-32                           
+  setup-cli-completion.mjs |       0 |        0 |       0 |       0 | 1-100                          
+  setup-cli-home.mjs       |       0 |        0 |       0 |       0 | 1-33                           
+  setup-cli-settings.mjs   |       0 |        0 |       0 |       0 | 1-58                           
+---------------------------|---------|----------|---------|---------|--------------------------------
+Test Suites: 1 passed, 1 total
+Tests:       12 passed, 12 total
+Snapshots:   0 total
+Time:        0.404 s, estimated 1 s
+Ran all test suites.
