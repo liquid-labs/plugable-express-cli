@@ -56,7 +56,7 @@ const setupCLISettings = async({ cliSettings }) => {
   const settingsYAML = yaml.dump(settings)
   // TODO: merge with existing; this is OK as long as we reset all vars here
 
-  await fs.mkdir(fsPath.dirname(cliSettingsPath), { recursive: true })
+  await fs.mkdir(fsPath.dirname(cliSettingsPath), { recursive : true })
   await fs.writeFile(cliSettingsPath, settingsYAML)
 }
 
