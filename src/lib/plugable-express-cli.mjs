@@ -31,7 +31,7 @@ const startCLI = async(cliSettings) => {
   const args = process.argv.slice(2)
 
   if (args.length === 0) {
-    process.stdout.write("Hit ctrl+C or enter '.' to exit.")
+    process.stdout.write("Hit ctrl+C or enter '.' to exit.\n")
 
     while (true) {
       const rl = readline.createInterface({ input : process.stdin, output : process.stdout })
