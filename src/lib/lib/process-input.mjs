@@ -12,7 +12,7 @@ import { processQnA } from './process-qna'
 const processInput = async({ args, cliSettings }) => {
   let settings
   try {
-    settings = yaml.load(cliSettings.localSettingsPath)
+    settings = yaml.load(cliSettings.cliSettingsPath)
   }
   catch (e) {
     if (e.code === 'ENOENT') {

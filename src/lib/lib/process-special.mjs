@@ -12,7 +12,7 @@ import { setupCLISettings } from './setup-cli-settings'
 let versionCache
 
 const processSpecial = async({ args, cliSettings }) => {
-  const { cliName, localSettingsPath } = cliSettings
+  const { cliName, cliSettingsPath } = cliSettings
   if (args[0] === '-v' || args[0] === '--version') {
     const { getVersion } = cliSettings
 
@@ -30,17 +30,17 @@ const processSpecial = async({ args, cliSettings }) => {
     process.stdout.write(`${cliName} ${getVersion()}\nplugable-express-cli ${versionCache}\n`)
     return true
   }
-  else if (args[0] !== 'setup' && existsSync(localSettingsPath) !== true) {
-    console.error(formatTerminalText(wrap(`It does not look like ${cliName} has been setup (did not find settings file <code>${localSettingsPath}<rst>). Try:\n<em>${cliName} setup<rst>`, { ignoreTags : true })))
+  else if (args[0] !== 'setup' && existsSync(cliSettingsPath) !== true) {
+    console.error(formatTerminalText(wrap(`It does not look like ${cliName} has been setup (did not find settings file <code>${cliSettingsPath}<rst>). Try:\n<em>${cliName} setup<rst>`, { ignoreTags : true })))
     process.exit(12)
   }
   else if (args[0] === 'setup') {
     if (await setupCLIHome({ cliSettings }) !== true) {
       console.log(wrap('\nBailing out. Review any messages above or submit a support request.'))
     }
-    await setupCLISettings()
+    await setupCLISettings({ cliSettings })
     installServer({ cliSettings })
-    await setupCLICompletion()
+    await setupCLICompletion({ cliSettings })
 
     return true
   }

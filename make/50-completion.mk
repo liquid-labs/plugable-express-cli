@@ -1,0 +1,7 @@
+COMPLETION_SRC:=$(SRC)/completion/completion.sh
+COMPLETION_BUILT:=$(DIST)/completion.sh
+
+$(COMPLETION_BUILT): $(COMPLETION_SRC)
+	cp "$<" "$@"
+
+BUILD_TARGETS+=$(COMPLETION_BUILT)
