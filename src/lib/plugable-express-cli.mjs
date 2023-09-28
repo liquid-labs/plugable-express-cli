@@ -1,3 +1,4 @@
+import * as fsPath from 'node:path'
 import * as readline from 'node:readline'
 
 import * as shlex from 'shlex'
@@ -8,14 +9,16 @@ import { processInput } from './lib/process-input'
 import { processSpecial } from './lib/process-special'
 
 const checkSettings = (cliSettings) => {
-  for (const setting of ['cliName', 'localSettingsPath', 'port', 'serverPackage']) {
+  for (const setting of ['cliName', 'port', 'serverPackage']) {
     if (cliSettings[setting] === undefined) {
       throw new Error(`CLI configuration '${setting}' is missing.`)
     }
   }
 
-  if (cliSettings.executable === undefined) {
-    cliSettings.executable = cliSettings.cliName
+  if (cliSettings.cliSettingsPath === undefined) {
+    const configHome = process.env.XDG_CONFIG_HOME || fsPath.join(process.env.HOME, '.config')
+    const cliSettingsPath = fsPath.join(configHome, 'plugable-express-cli', 'cli-settings.yaml')
+    cliSettings.cliSettingsPath = cliSettingsPath
   }
   if (cliSettings.protocol === undefined) {
     cliSettings.protocol = 'http'
@@ -41,16 +44,22 @@ const startCLI = async(cliSettings) => {
         rl.prompt()
 
         const it = rl[Symbol.asyncIterator]()
-        const answer = (await it.next()).value.trim()
+        const answer = (await it.next()).value?.trim()
 
-        if (answer === '.') {
+        if (answer === '.' || answer === undefined /* when user hits ctrl+C */) {
+          if (answer === undefined) process.stdout.write('\n')
           process.stdout.write('Goodbye.\n')
           process.exit(0)
         }
 
         const shellTokens = shlex.split(answer)
 
-        await processInput({ args : shellTokens, cliSettings })
+        try {
+          await processInput({ args : shellTokens, cliSettings })
+        }
+        catch (e) {
+          process.stdout.write(e.message + '\n')
+        }
       }
       finally { rl.close() }
     }

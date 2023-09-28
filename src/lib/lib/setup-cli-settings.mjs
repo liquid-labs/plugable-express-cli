@@ -1,4 +1,5 @@
 import * as fs from 'node:fs/promises'
+import * as fsPath from 'node:path'
 
 import yaml from 'js-yaml'
 
@@ -24,11 +25,11 @@ const settingsQuestions = {
 }
 
 const setupCLISettings = async({ cliSettings }) => {
-  const { localSettingsPath } = cliSettings
+  const { cliSettingsPath } = cliSettings
 
   let settings
   try {
-    settings = yaml.load(localSettingsPath)
+    settings = yaml.load(await fs.readFile(cliSettingsPath))
   }
   catch (e) {
     if (e.code === 'ENOENT') {
@@ -51,10 +52,12 @@ const setupCLISettings = async({ cliSettings }) => {
   settings.TERMINAL.style = terminalStyle
   settings.TERMINAL.width = terminalWidth
 
-  console.log(formatTerminalText(`Updating <code>${localSettingsPath}<rst>...`))
+  console.log(formatTerminalText(`Updating <code>${cliSettingsPath}<rst>...`))
   const settingsYAML = yaml.dump(settings)
   // TODO: merge with existing; this is OK as long as we reset all vars here
-  await fs.writeFile(settingsYAML, localSettingsPath)
+
+  await fs.mkdir(fsPath.dirname(cliSettingsPath), { recursive: true })
+  await fs.writeFile(cliSettingsPath, settingsYAML)
 }
 
 export { setupCLISettings }

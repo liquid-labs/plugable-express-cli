@@ -6,13 +6,13 @@ import { formatTerminalText } from '@liquid-labs/terminal-text'
 import { wrap } from '@liquid-labs/wrap-text'
 
 const setupCLIHome = async({ cliSettings }) => {
-  const { additionalCLIHomeSetup, cliName, localSettingsPath } = cliSettings
+  const { additionalCLIHomeSetup, cliName, cliSettingsPath } = cliSettings
 
-  if (existsSync(localSettingsPath)) {
-    console.log(formatTerminalText(wrap(`Found existing ${cliName} settings file: <code>${localSettingsPath}<rst>`, { ignoreTags : true })))
+  if (existsSync(cliSettingsPath)) {
+    console.log(formatTerminalText(wrap(`Found existing ${cliName} settings file: <code>${cliSettingsPath}<rst>`, { ignoreTags : true })))
   }
   else {
-    const settingsDir = fsPath.dirname(localSettingsPath)
+    const settingsDir = fsPath.dirname(cliSettingsPath)
     console.log(formatTerminalText(wrap(`Creating ${cliName} settings home: <code>${settingsDir}<rst>...`, { ignoreTags : true })))
     try {
       await fs.mkdir(settingsDir, { recursive : true })
