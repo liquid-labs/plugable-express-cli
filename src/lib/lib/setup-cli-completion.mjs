@@ -75,7 +75,6 @@ source ${completionTarget}`
   console.log(formatTerminalText(wrap(`Copying completion script to <code>${completionTarget}<rst>...`, { ignoreTags : true })))
   const completionTemplate = await fs.readFile(completionSrc, { encoding : 'utf8' })
   const completionScript = completionTemplate.replaceAll(/\{\{ *\.CLI_NAME *\}\}/gm, cliName)
-  console.error('completionTarget:', completionTarget) // DEBUG
   await fs.writeFile(completionTarget, completionScript)
 
   let shellConfig
