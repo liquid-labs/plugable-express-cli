@@ -6,8 +6,16 @@ _{{ .CLI_NAME }}() {
   ORG=$(basename "$(dirname "$PWD")")
 
   COMPREPLY=( $({{ .CLI_NAME }} server next-commands -- command="${COMP_LINE}") )
-  if [[ ${COMP_LINE} =~ '^ *{{ .CLI_NAME }} *$' ]]; then
-    COMPREPLY+=( 'setup' 'update' )
+  # for this to work, /must/ load pattern into var like this
+  PATTERN='^[ ]*catalyst[ ]*([^ ]*)$'
+  if [[ ${COMP_LINE} =~ $PATTERN ]]; then
+    NEXT_TOKEN=${BASH_REMATCH[1]}
+    if [[ setup-server ==  ${NEXT_TOKEN}* ]]; then
+      COMPREPLY+=( 'setup-server' )
+    fi
+    if [[ --version ==  ${NEXT_TOKEN}* ]]; then
+      COMPREPLY+=( '--version' )
+    fi
   fi
 }
 
