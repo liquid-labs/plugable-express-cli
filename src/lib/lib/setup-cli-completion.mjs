@@ -72,7 +72,7 @@ source ${completionTarget}`
 
   const completionSrc = fsPath.resolve(__dirname, 'completion.sh')
   const completionTarget = fsPath.join(completionConfigPath, cliName)
-  console.log(formatTerminalText(wrap(`Copying completion script to <code>${completionTarget}<rst>...`, { ignoreTags : true, ...terminal  })))
+  console.log(formatTerminalText(wrap(`Copying completion script to <code>${completionTarget}<rst>...`, { ignoreTags : true, ...terminal })))
   const completionTemplate = await fs.readFile(completionSrc, { encoding : 'utf8' })
   const completionScript = completionTemplate.replaceAll(/\{\{ *\.CLI_NAME *\}\}/gm, cliName)
   await fs.writeFile(completionTarget, completionScript)
@@ -91,7 +91,7 @@ source ${completionTarget}`
     shellConfig = possibleConfigFiles[0]
     await fs.writeFile(shellConfig, `# ${fsPath.basename(shellConfig)}  - executed for non-login interactive shells\n`)
   }
-  console.log(formatTerminalText(wrap(`Writing completion sourcing to <code>${shellConfig}<rst>...`, { ignoreTags : true, ... terminal })))
+  console.log(formatTerminalText(wrap(`Writing completion sourcing to <code>${shellConfig}<rst>...`, { ignoreTags : true, ...terminal })))
 
   const contents = sourceConfig({ completionTarget })
   refresh({ contents, file : shellConfig, sectionKey : `${cliName} completion` })

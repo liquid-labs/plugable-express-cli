@@ -30,13 +30,11 @@ const checkSettings = (cliSettings) => {
   }
 }
 
-const loadCLIConfig = async (cliSettings) => {
-  const { cliSettingsPath } = cliSettings
-
+const loadCLIConfig = async(cliSettings) => {
   let width = 80 // the default
   try {
     const cliConfigPath = cliSettings.cliSettingsPath
-    const cliConfigContents = await fs.readFile(cliConfigPath, { encoding: 'utf8' })
+    const cliConfigContents = await fs.readFile(cliConfigPath, { encoding : 'utf8' })
     const cliConfig = yaml.load(cliConfigContents)
     const configWidth = cliConfig.TERMINAL?.width
 
