@@ -1,7 +1,9 @@
+import * as fs from 'node:fs/promises'
 import * as fsPath from 'node:path'
 import * as readline from 'node:readline'
 
 import * as shlex from 'shlex'
+import * as yaml from 'js-yaml'
 
 import { formatTerminalText } from '@liquid-labs/terminal-text'
 
@@ -28,8 +30,38 @@ const checkSettings = (cliSettings) => {
   }
 }
 
+const loadCLIConfig = async (cliSettings) => {
+  const { cliSettingsPath } = cliSettings
+
+  let width = 80 // the default
+  try {
+    const cliConfigPath = cliSettings.cliSettingsPath
+    const cliConfigContents = await fs.readFile(cliConfigPath, { encoding: 'utf8' })
+    const cliConfig = yaml.load(cliConfigContents)
+    const configWidth = cliConfig.TERMINAL?.width
+
+    if (configWidth !== undefined) {
+      const maxWidth = process.stdout.columns
+      if (maxWidth !== undefined) {
+        width = configWidth < maxWidth ? configWidth : 0
+      }
+      else {
+        width = configWidth
+      }
+    }
+  }
+  catch (e) {
+    if (e.code !== 'ENOENT') {
+      throw e
+    }
+  }
+
+  cliSettings.terminal = { width }
+}
+
 const startCLI = async(cliSettings) => {
   checkSettings(cliSettings)
+  await loadCLIConfig(cliSettings)
 
   const args = process.argv.slice(2)
 

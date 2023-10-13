@@ -24,6 +24,7 @@ const processInput = async({ args, cliSettings }) => {
   }
 
   let response = await callEndpoint({ args, cliSettings })
+  const { terminal } = cliSettings
 
   const isQnA = !!response.headers.get('X-Question-and-Answer')
 
@@ -57,7 +58,7 @@ const processInput = async({ args, cliSettings }) => {
     else {
       const terminalOpts = settings?.TERMINAL || {}
       const text = await response.text()
-      const wrappedText = wrap(text, { ignoreTags : true, smartIndent : true })
+      const wrappedText = wrap(text, { ignoreTags : true, smartIndent : true, ...terminal })
       console.log(formatTerminalText(wrappedText, terminalOpts))
     }
   }
