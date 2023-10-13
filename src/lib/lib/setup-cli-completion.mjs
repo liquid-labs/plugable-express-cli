@@ -21,14 +21,14 @@ const possibleZshSystemCompletionPaths = [fsPath.resolve(fsPath.sep + 'etc', 'pr
 const possibleZshConfigFiles = [fsPath.join(process.env.HOME, '.zshrc')]
 
 const setupCLICompletion = async({ cliSettings }) => {
-  const { cliName } = cliSettings
+  const { cliName, terminal } = cliSettings
 
   const shell = process.env.SHELL?.replace(/.*?\/([A-Za-z0-9_-])/, '$1')
   if (shell === undefined) {
     console.warn("'SHELL' environment variable not set; cannot setup completion.")
     return
   }
-  console.log(wrap(`Setting up ${shell} completion...`))
+  console.log(wrap(`Setting up ${shell} completion...`, { ...terminal }))
 
   let possibleSystemCompletionPaths, localCompletionPath, possibleConfigFiles, sourceConfig
 
@@ -49,7 +49,7 @@ bashcompinit
 source ${completionTarget}`
   }
   else {
-    console.warn(wrap(`Unknown shell type '${shell}'; cannot set up completion. Bash and zsh are supported.`))
+    console.warn(wrap(`Unknown shell type '${shell}'; cannot set up completion. Bash and zsh are supported.`, { ...terminal }))
     return
   }
 
@@ -72,7 +72,7 @@ source ${completionTarget}`
 
   const completionSrc = fsPath.resolve(__dirname, 'completion.sh')
   const completionTarget = fsPath.join(completionConfigPath, cliName)
-  console.log(formatTerminalText(wrap(`Copying completion script to <code>${completionTarget}<rst>...`, { ignoreTags : true })))
+  console.log(formatTerminalText(wrap(`Copying completion script to <code>${completionTarget}<rst>...`, { ignoreTags : true, ...terminal })))
   const completionTemplate = await fs.readFile(completionSrc, { encoding : 'utf8' })
   const completionScript = completionTemplate.replaceAll(/\{\{ *\.CLI_NAME *\}\}/gm, cliName)
   await fs.writeFile(completionTarget, completionScript)
@@ -91,12 +91,12 @@ source ${completionTarget}`
     shellConfig = possibleConfigFiles[0]
     await fs.writeFile(shellConfig, `# ${fsPath.basename(shellConfig)}  - executed for non-login interactive shells\n`)
   }
-  console.log(formatTerminalText(wrap(`Writing completion sourcing to <code>${shellConfig}<rst>...`, { ignoreTags : true })))
+  console.log(formatTerminalText(wrap(`Writing completion sourcing to <code>${shellConfig}<rst>...`, { ignoreTags : true, ...terminal })))
 
   const contents = sourceConfig({ completionTarget })
   refresh({ contents, file : shellConfig, sectionKey : `${cliName} completion` })
 
-  console.log(formatTerminalText(wrap(`To enable completion, you must open a new shell, or try:\n<em>source ${shellConfig}<rst>`, { ignoreTags : true })))
+  console.log(formatTerminalText(wrap(`To enable completion, you must open a new shell, or try:\n<em>source ${shellConfig}<rst>`, { ignoreTags : true, ...terminal })))
 }
 
 export { setupCLICompletion }

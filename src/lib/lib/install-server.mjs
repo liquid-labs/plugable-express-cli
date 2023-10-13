@@ -6,14 +6,14 @@ import { tryExec } from '@liquid-labs/shell-toolkit'
 import { wrap } from '@liquid-labs/wrap-text'
 
 const installServer = ({ cliSettings }) => {
-  const { cliName, executable, localServerDevPaths: testPaths = [], serverPackage } = cliSettings
+  const { cliName, executable, localServerDevPaths: testPaths = [], serverPackage, terminal } = cliSettings
   const results = tryExec(`which ${executable}`, { noThrow : true })
   if (results.code === 0) {
-    console.log(formatTerminalText(wrap(`Found existing <code>${cliName}<rst> install.`, { ignoreTags : true })))
+    console.log(formatTerminalText(wrap(`Found existing <code>${cliName}<rst> install.`, { ignoreTags : true, ...terminal })))
   }
   else {
-    console.log(formatTerminalText(wrap(`Installing <code>${serverPackage}<rst>...`, { ignoreTags : true })))
-    console.log(wrap('Checking for local installation...'))
+    console.log(formatTerminalText(wrap(`Installing <code>${serverPackage}<rst>...`, { ignoreTags : true, ...terminal })))
+    console.log(wrap('Checking for local installation...', { ...terminal }))
 
     let localPath
     for (const testPath of testPaths) {
