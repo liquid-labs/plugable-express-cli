@@ -12,14 +12,11 @@ const callEndpoint = async({ args, bundle, cliSettings }) => {
     return await fetch(url, fetchOpts)
   }
   catch (e) {
-    console.log('error...', e.code) // DEBUG
     if (e.code === 'ECONNREFUSED' || e.cause?.code === 'ECONNREFUSED') {
-      console.log('ECONNREFUSED...') // DEBUG
       await startServer({ cliSettings, rootURL })
       return await callEndpoint({ args, bundle, cliSettings })
     }
     else {
-      console.log('throwing...') // DEBUG
       throw (e)
     }
   }
