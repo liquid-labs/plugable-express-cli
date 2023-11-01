@@ -1,5 +1,9 @@
 import * as fs from 'node:fs/promises'
 
+import { wrap } from '@liquid-labs/wrap-text'
+
+import { startServer } from './start-server'
+
 const methods = ['DELETE', 'GET', 'OPTIONS', 'POST', 'PUT', 'UNBIND']
 
 const extToMime = (value) => {
@@ -24,7 +28,7 @@ const extToMime = (value) => {
   }
 }
 
-const processCommand = async({ args, cliSettings }) => {
+const processCommand = async({ args, cliSettings, failOnNoAPI = false }) => {
   const { port, protocol, server } = cliSettings
 
   let method
@@ -77,7 +81,15 @@ const processCommand = async({ args, cliSettings }) => {
     }
   }
 
+  const rootURL = `${protocol}://${server}:${port}`
+
   if (method === undefined && endpointSpec === undefined && process.env.TEST_METHOD === undefined) {
+    if (api === undefined && failOnNoAPI === false) {
+      wrap('No API spec found; perhaps server is not running...', { ignoreTags : true, ...cliSettings.terminal })
+      await startServer({ cliSettings, rootURL })
+      return processCommand({ args, cliSettings, failOnNoAPI : true })
+    }
+    // else
     const msg = api === undefined
       ? 'No API spec found and no HTTP method specified.'
       : `No endpoint found in API for path: ${path}`
@@ -86,7 +98,7 @@ const processCommand = async({ args, cliSettings }) => {
   method = method || endpointSpec?.method || process.env.TEST_METHOD
 
   const query = data.length > 0 && method !== 'POST' ? '?' + new URLSearchParams(data).toString() : ''
-  const url = `${protocol}://${server}:${port}${path}${query}`
+  const url = `${rootURL}${path}${query}`
 
   const fetchOpts = {
     headers : {
@@ -121,6 +133,7 @@ const processCommand = async({ args, cliSettings }) => {
     fetchOpts,
     method,
     path,
+    rootURL,
     url
   }
 }

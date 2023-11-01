@@ -32,7 +32,6 @@
   },
   "dependencies": {
     "@liquid-labs/edit-section": "^1.0.0-alpha.1",
-    "@liquid-labs/liq-defaults": "^1.0.0-alpha.2",
     "@liquid-labs/npm-toolkit": "^1.0.0-alpha.3",
     "@liquid-labs/question-and-answer": "^1.0.0-alpha.12",
     "@liquid-labs/shell-toolkit": "^1.0.0-alpha.7",
