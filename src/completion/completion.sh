@@ -10,8 +10,8 @@ _{{ .CLI_NAME }}() {
   PATTERN='^[ ]*catalyst[ ]*([^ ]*)$'
   if [[ ${COMP_LINE} =~ $PATTERN ]]; then
     NEXT_TOKEN=${BASH_REMATCH[1]}
-    if [[ setup-server ==  ${NEXT_TOKEN}* ]]; then
-      COMPREPLY+=( 'setup-server' )
+    if [[ --setup ==  ${NEXT_TOKEN}* ]]; then
+      COMPREPLY+=( '--setup' )
     fi
     if [[ --version ==  ${NEXT_TOKEN}* ]]; then
       COMPREPLY+=( '--version' )

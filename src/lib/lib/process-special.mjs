@@ -30,11 +30,11 @@ const processSpecial = async({ args, cliSettings }) => {
     process.stdout.write(`${cliName} ${getVersion()}\nplugable-express-cli ${versionCache}\n`)
     return true
   }
-  else if (args[0] !== 'setup-server' && existsSync(cliSettingsPath) !== true) {
+  else if (args[0] !== '--setup' && existsSync(cliSettingsPath) !== true) {
     console.error(formatTerminalText(wrap(`It does not look like ${cliName} has been setup (did not find settings file <code>${cliSettingsPath}<rst>). Try:\n<em>${cliName} setup<rst>`, { ignoreTags : true, ...terminal })))
     process.exit(12)
   }
-  else if (args[0] === 'setup-server') {
+  else if (args[0] === '--setup') {
     if (await setupCLIHome({ cliSettings }) !== true) {
       console.log(wrap('\nBailing out. Review any messages above or submit a support request.', { ...terminal }))
     }
