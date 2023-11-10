@@ -40,6 +40,8 @@ const setupCLISettings = async({ cliSettings }) => {
     }
   }
 
+  settings = Object.assign({}, process.env, settings)
+
   const questioner = new Questioner({ initialParameters : settings, interrogationBundle : settingsQuestions })
 
   await questioner.question()
