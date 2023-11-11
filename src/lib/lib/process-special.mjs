@@ -39,7 +39,7 @@ const processSpecial = async({ args, cliSettings }) => {
       console.log(wrap('\nBailing out. Review any messages above or submit a support request.', { ...terminal }))
     }
     await setupCLISettings({ cliSettings })
-    installServer({ cliSettings })
+    await installServer({ cliSettings })
     await setupCLICompletion({ cliSettings })
 
     return true
