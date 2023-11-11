@@ -5,7 +5,7 @@ import { formatTerminalText } from '@liquid-labs/terminal-text'
 import { tryExec } from '@liquid-labs/shell-toolkit'
 import { wrap } from '@liquid-labs/wrap-text'
 
-const installServer = async ({ cliSettings }) => {
+const installServer = async({ cliSettings }) => {
   const { cliName, executable, localServerDevPaths: testPaths = [], serverPackage, terminal } = cliSettings
   const results = tryExec(`which ${executable}`, { noThrow : true })
   if (results.code === 0) {
