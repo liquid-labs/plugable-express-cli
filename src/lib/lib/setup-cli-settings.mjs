@@ -41,8 +41,8 @@ const setupCLISettings = async({ cliSettings }) => {
   }
 
   const initialParameters = Object.assign({
-    TERMINAL_STYLE: settings.TERMINAL?.style,
-    TERMINAL_WIDTH: settings.TERMINAL?.width
+    TERMINAL_STYLE : settings.TERMINAL?.style,
+    TERMINAL_WIDTH : settings.TERMINAL?.width
   }, process.env)
 
   const questioner = new Questioner({ initialParameters, interrogationBundle : settingsQuestions })
