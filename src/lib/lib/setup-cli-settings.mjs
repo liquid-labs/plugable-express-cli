@@ -40,9 +40,12 @@ const setupCLISettings = async({ cliSettings }) => {
     }
   }
 
-  settings = Object.assign({}, process.env, settings)
+  const initialParameters = Object.assign({
+    TERMINAL_STYLE : settings.TERMINAL?.style,
+    TERMINAL_WIDTH : settings.TERMINAL?.width
+  }, process.env)
 
-  const questioner = new Questioner({ initialParameters : settings, interrogationBundle : settingsQuestions })
+  const questioner = new Questioner({ initialParameters, interrogationBundle : settingsQuestions })
 
   await questioner.question()
   const terminalStyle = questioner.get('TERMINAL_STYLE')
