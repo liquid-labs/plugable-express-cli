@@ -7,7 +7,7 @@ _{{ .CLI_NAME }}() {
 
   COMPREPLY=( $({{ .CLI_NAME }} server next-commands -- command="${COMP_LINE}") )
   # for this to work, /must/ load pattern into var like this
-  PATTERN='^[ ]*catalyst[ ]*([^ ]*)$'
+  PATTERN='^[ ]*.+[ ]*([^ ]*)$' # the first '.+' matches the command
   if [[ ${COMP_LINE} =~ $PATTERN ]]; then
     NEXT_TOKEN=${BASH_REMATCH[1]}
     if [[ --setup ==  ${NEXT_TOKEN}* ]]; then
