@@ -41,10 +41,10 @@ const setupCLISettings = async({ cliSettings }) => {
   }
 
   const initialParameters = Object.assign({}, process.env)
-  if (settings.TERIMINAL?.style && !('TERMINAL_STYLE' in env)) {
+  if (settings.TERIMINAL?.style && !('TERMINAL_STYLE' in process.env)) {
     initialParameters.TERMINAL_STYLE = settings.TERIMINAL.style
   }
-  if (settings.TERIMINAL?.width && !('TERMINAL_STYLE' in env)) {
+  if (settings.TERIMINAL?.width && !('TERMINAL_STYLE' in process.env)) {
     initialParameters.TERMINAL_WIDTH = settings.TERIMINAL.width
   }
 
