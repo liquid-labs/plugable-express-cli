@@ -33,7 +33,7 @@
   "dependencies": {
     "@liquid-labs/edit-section": "^1.0.0-alpha.1",
     "@liquid-labs/npm-toolkit": "^1.0.0-alpha.15",
-    "@liquid-labs/question-and-answer": "^1.0.0-alpha.13",
+    "@liquid-labs/question-and-answer": "^1.0.0-alpha.14",
     "@liquid-labs/shell-toolkit": "^1.0.0-alpha.7",
     "@liquid-labs/terminal-text": "^1.0.0-alpha.3",
     "@liquid-labs/wrap-text": "^1.0.0-alpha.7",
