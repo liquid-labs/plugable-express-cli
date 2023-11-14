@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs'
 import * as fsPath from 'node:path'
 
+import { initServerSettings } from '@liquid-labs/plugable-express'
 import { formatTerminalText } from '@liquid-labs/terminal-text'
 import { wrap } from '@liquid-labs/wrap-text'
 
@@ -39,6 +40,7 @@ const processSpecial = async({ args, cliSettings }) => {
       console.log(wrap('\nBailing out. Review any messages above or submit a support request.', { ...terminal }))
     }
     await setupCLISettings({ cliSettings })
+    await initServerSettings(cliSettings /* contains: { defaultRegistries, noRegistries, serverHome } */)
     await installServer({ cliSettings })
     await setupCLICompletion({ cliSettings })
 
