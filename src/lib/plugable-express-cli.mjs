@@ -5,6 +5,7 @@ import * as readline from 'node:readline'
 import * as shlex from 'shlex'
 import * as yaml from 'js-yaml'
 
+import { PLUGABLE_CLI_SETTINGS_PATH } from '@liquid-labs/plugable-defaults'
 import { formatTerminalText } from '@liquid-labs/terminal-text'
 
 import { processInput } from './lib/process-input'
@@ -18,9 +19,7 @@ const checkSettings = (cliSettings) => {
   }
 
   if (cliSettings.cliSettingsPath === undefined) {
-    const configHome = process.env.XDG_CONFIG_HOME || fsPath.join(process.env.HOME, '.config')
-    const cliSettingsPath = fsPath.join(configHome, 'plugable-express-cli', 'cli-settings.yaml')
-    cliSettings.cliSettingsPath = cliSettingsPath
+    cliSettings.cliSettingsPath = PLUGABLE_CLI_SETTINGS_PATH()
   }
   if (cliSettings.protocol === undefined) {
     cliSettings.protocol = 'http'
