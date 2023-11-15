@@ -1,5 +1,4 @@
 import * as fs from 'node:fs/promises'
-import * as fsPath from 'node:path'
 import * as readline from 'node:readline'
 
 import * as shlex from 'shlex'

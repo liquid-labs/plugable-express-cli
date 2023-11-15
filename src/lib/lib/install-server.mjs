@@ -6,7 +6,7 @@ import { tryExec } from '@liquid-labs/shell-toolkit'
 import { wrap } from '@liquid-labs/wrap-text'
 
 const installServer = async({ cliSettings }) => {
-  const { cliName, executable, localServerDevPaths: testPaths = [], serverPackage, terminal } = cliSettings
+  const { localServerDevPaths: testPaths = [], serverPackage, terminal } = cliSettings
 
   const result = tryExec(`npm ls -g ${serverPackage}`, { noThrow : true })
   if (result.code === 0) { // then nothing to do
