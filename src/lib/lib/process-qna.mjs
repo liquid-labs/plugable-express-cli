@@ -1,3 +1,5 @@
+import shlex from 'shlex'
+
 import { formatTerminalText } from '@liquid-labs/terminal-text'
 import { Questioner } from '@liquid-labs/question-and-answer'
 
@@ -16,6 +18,10 @@ const addArg = ({ args, parameter, paramType, value }) => {
 }
 
 const processQnA = async({ args, cliSettings, response }) => {
+  const returnCommand = response.headers.get('X-Answer-Return-Command')
+  if (returnCommand !== undefined) {
+    args = shlex.split(returnCommand)
+  }
   // the incoming response is from the previous call, which has indicated a QnA request
   const qnaBundles = await response.json()
   const answerBundles = []
