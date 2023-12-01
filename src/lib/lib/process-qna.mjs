@@ -19,7 +19,7 @@ const addArg = ({ args, parameter, paramType, value }) => {
 
 const processQnA = async({ args, cliSettings, response }) => {
   const returnCommand = response.headers.get('X-Answer-Return-Command')
-  if (returnCommand !== undefined) {
+  if (returnCommand) {
     args = shlex.split(returnCommand)
   }
   // the incoming response is from the previous call, which has indicated a QnA request
