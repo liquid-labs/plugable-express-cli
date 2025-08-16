@@ -23,6 +23,8 @@ const extToMime = (value) => {
     return 'application/pdf'
   case 'docx':
     return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+  case 'yaml':
+    return 'application/yaml'
   default:
     return 'application/json'
   }
@@ -57,9 +59,8 @@ const processCommand = async({ args, cliSettings, failOnNoAPI = false }) => {
       let [name, value = 'true', ...moreValue] = arg.split(/=/)
       // there may be '=' in the parameter value, so we re-build it
       value = [value, ...moreValue].join('=')
-      if (name === 'format') {
+      if (name === 'format') { // 'format' is a universal option used to set the output format of any command
         accept = extToMime(value)
-        data.push([name, value]) // everything should work with our without this
       }
       else if (name !== 'sendFormParam') {
         data.push([name, value])
