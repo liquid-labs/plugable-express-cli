@@ -1,7 +1,7 @@
 {
   "name": "@liquid-labs/plugable-express-cli",
   "version": "1.0.0-alpha.18",
-  "description": "",
+  "description": "Used to create a CLI interface to any plugable-express server providing integrated endpoint discovery, tab completion, interactive mode, and help.",
   "main": "dist/plugable-express-cli.js",
   "scripts": {
     "build": "make all",
@@ -19,7 +19,15 @@
   "engines": {
     "node": ">18.0.0"
   },
-  "keywords": [],
+  "keywords": [
+    "cli",
+    "cli-framework",
+    "command-line",
+    "express",
+    "plugable",
+    "plugable-express",
+    "developer-tools"
+  ],
   "author": "Zane Rockenbaugh <zane@liquid-labs.com>",
   "license": "UNLICENSED",
   "repository": "git+ssh://git@github.com/liquid-labs/plugable-express-cli.git",
