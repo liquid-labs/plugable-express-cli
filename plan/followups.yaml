@@ -1,0 +1,11 @@
+version: 2
+items:
+    - title: 'Fresh checkout build fails: dist/ not mkdir''d'
+      id: afdx
+      date: "2026-08-10"
+      tags:
+        - type:bug
+        - plan/slug:modernization-foundation
+        - priority:unspecified
+        - effort:unspecified
+      text: 'make/50-completion.mk''s $(COMPLETION_BUILT): $(COMPLETION_SRC) rule does `cp "$&lt;" "$@"` without first ensuring dist/ exists, so `npm install`/`npm run build` fails on any fresh checkout or worktree where dist/ has never been created (no prior build). Reproduced via `git stash` on an unmodified checkout. Workaround used during dispatch: `mkdir -p dist` before `npm install`. Worth fixing the Makefile rule to create dist/ as a prerequisite.'
