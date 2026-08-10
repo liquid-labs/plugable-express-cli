@@ -15,7 +15,7 @@ This library provides a framework for building command-line interfaces that seam
 
 The CLI dynamically adapts to the server's capabilities, meaning that as new endpoints are added to the server, they immediately become available through the CLI without any CLI code changes.
 
-For example, [`sdlcpilot-cli`](https://github.com/liquid-labs/sdlcpilot-cli) uses this framework to create a CLI interface for the [`comply-server`](https://github.com/liquid-labs/comply-server), providing commands for software development lifecycle management. The CLI automatically discovers all available commands from the server and provides a rich, interactive experience.
+For example, [`sdlcpilot-cli`](https://github.com/liquid-labs/sdlcpilot-cli) uses this framework to create a CLI interface for the [`sdlcforge-server`](https://github.com/sdlcforge/core-server), providing commands for software development lifecycle management. The CLI automatically discovers all available commands from the server and provides a rich, interactive experience.
 
 ## Usage
 
@@ -48,9 +48,9 @@ const cliSettings = {
   getVersion,                         // Version function
   port: 8080,                         // Server port
   serverAPIPath: '/path/to/api.json', // API specification path
-  serverExec: 'comply-server',        // Server executable command
+  serverExec: 'sdlcforge-server',        // Server executable command
   serverHome: '/path/to/server/home', // Server home directory
-  serverPackage: 'comply-server',     // NPM package name of server
+  serverPackage: '@sdlcforge/core-server',     // NPM package name of server
   serverVersion: 'latest',            // Server version to install
   
   // Optional settings

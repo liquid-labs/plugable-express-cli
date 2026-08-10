@@ -19,7 +19,7 @@
    - Defines server package, port, and other parameters
    - Acts as a thin wrapper around the framework
 
-3. **Server** (e.g., `comply-server`)
+3. **Server** (e.g., `sdlcforge-server`)
    - Express-based server providing REST endpoints
    - Exposes API specification for endpoint discovery
    - Handles actual business logic
